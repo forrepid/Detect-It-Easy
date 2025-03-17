@@ -1,106 +1,114 @@
+# 🔍 Detect It Easy (DiE)
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NF3FBD3KHMXDN)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/horsicq/DIE-engine.svg)](http://ntinfo.biz)
 [![GitHub All Releases](https://img.shields.io/github/downloads/horsicq/DIE-engine/total.svg)](http://ntinfo.biz)
-[![gitlocalized ](https://gitlocalize.com/repo/4736/whole_project/badge.svg)](https://gitlocalize.com/repo/4736/whole_project?utm_source=badge)
+[![gitlocalized ](https://gitlocalize.com/repo/4736/whole_project/badge.svg)](https://github.com/horsicq/XTranslation)
 
-Detect It Easy
-==============
+**Detect It Easy (DiE)** is a powerful tool for file type identification, popular among **malware analysts**, **cybersecurity experts**, and **reverse engineers** worldwide. Supporting both **signature-based** and **heuristic analysis**, DiE enables efficient file inspections across a broad range of platforms, including **Windows, Linux, and MacOS**. Its adaptable, script-driven detection architecture makes it one of the most versatile tools in the field, with a comprehensive list of supported OS images.
 
-**For windows users: If you have Antivirus issues please use the version: https://github.com/horsicq/DIE-engine/releases/download/3.00/die_win32_portable_noloader_3.00.zip**
+## 🚀 Getting Started
 
-![alt text](https://github.com/horsicq/Detect-It-Easy/blob/master/mascots/3.00.jpg "Version")
-![alt text](https://github.com/horsicq/Detect-It-Easy/blob/master/screenshot.jpg "Screenshot")
+- **[💎 Download release](https://github.com/horsicq/DIE-engine/releases)**
+- **[🧪 Download dev/beta](https://github.com/horsicq/Detect-It-Easy/releases/tag/Beta)**
+- **[🚀 DIE API Library (for Developers)](https://github.com/horsicq/die_library)**
+- [📋 Changelog](https://github.com/horsicq/Detect-It-Easy/blob/master/changelog.txt)
+- [💬 Contribute to Translations](https://github.com/horsicq/XTranslation)
 
-Detect It Easy, or abbreviated "DIE" is a program for determining types of files.
+![Screenshot](docs/1.png)
 
-"DIE" is a cross-platform application, apart from Windows version there are also
-available versions for Linux and Mac OS.
+## 💡 Why Use Detect It Easy?
 
-Many programs of the kind (PEID, PE tools) allow to use third-party signatures.
-Unfortunately, those signatures scan only bytes by the pre-set mask, and it is
-not possible to specify additional parameters. As the result, false triggering
-often occur. More complicated algorithms are usually strictly set in the program
-itself. Hence, to add a new complex detect one needs to recompile the entire
-project. No one, except the authors themselves, can change the algorithm of
-a detect. As time passes, such programs lose relevance without the constant support.
+Detect It Easy’s **flexible signature system** and **scripting capabilities** make it an essential tool for **malware analysis** and **digital forensics**. With traditional static analyzers often limited in scope and prone to false positives, DiE’s customizable design enables precise integration of new detection logic, ensuring reliable results across diverse file types.
 
-Detect It Easy has totally open architecture of signatures. You can easily
-add your own algorithms of detects or modify those that already exist. This
-is achieved by using scripts. The script language is very similar to JavaScript
-and any person, who understands the basics of programming, will understand easily
-how it works. Possibly, someone may decide the scripts are working very slow.
-Indeed, scripts run slower than compiled code, but, thanks to the good optimization
-of Script Engine, this doesn't cause any special inconvenience. The possibilities
-of open architecture compensate these limitations.
+![Screenshot](docs/2.png)
 
-DIE exists in three versions. Basic version ("DIE"), Lite version ("DIEL") and
-console version ("DIEC"). All the three use the same signatures, which are located
-in the folder "db". If you open this folder, nested sub-folders will be found
-("Binary", "PE" and others). The names of sub-folders correspond to the types of files.
-First, DIE determines the type of file, and then sequentially loads all the signatures,
-which lie in the corresponding folder. Currently the program defines the following types:
+### Key Advantages:
 
-* MSDOS executable files MS-DOS
+- **Flexible Signature Management**: Easily create, modify, and optimize signatures.
+- **Cross-Platform Support**: Runs on Windows, Linux, and MacOS.
+- **Minimal False Positives**: Combined signature and heuristic analysis ensures high detection accuracy.
 
-* PE executable files Windows
+## 📄 Supported File Types
 
-* ELF executable files Linux
+Detect It Easy supports a wide range of executable and archive types, including:
 
-* MACH executable files Mac OS
+- **PE** (Portable Executable format for Windows)
+- **ELF** (Executable and Linkable Format for Linux)
+- **APK** (Android Application Package)
+- **IPA** (iOS Application Package)
+- **JAR** (Java Archive)
+- **ZIP** (Compressed archives)
+- **DEX** (Dalvik Executable for Android)
+- **MS-DOS** (MS-DOS executable files)
+- **COM** (Simple executable format for DOS)
+- **LE/LX** (Linear Executable for OS/2)
+- **MACH** (Mach-O files for MacOS)
+- **NPM** (JavaScript packages)
+- **Amiga** (Executable format for Amiga computers)
+- **Binary** (Other unclassified files)
 
-* Binary all other files
+Unknown formats undergo heuristic analysis, providing identification for both known and unrecognized files.
 
-Download: https://github.com/horsicq/DIE-engine/releases
+## 🔑 Key Features
 
-![alt text](https://github.com/horsicq/Detect-It-Easy/blob/master/mascots/die.jpg "Mascot")
+- **Flexible Signature Management**: Define or modify detection signatures.
+- **Scripted Detection**: Use a JavaScript-like scripting language for custom detection algorithms.
+- **Cross-Platform Compatibility**: Available for Windows, Linux, and MacOS.
+- **Reduced False Positives**: Combines signature and heuristic scanning for accuracy.
 
-How to build on Linux
-=======
+## 📥 Installation
 
-Install Qt 5.12.8: https://github.com/horsicq/build_tools
+### 📦 Install via Package Managers
 
-Clone project: git clone --recursive https://github.com/horsicq/DIE-engine.git
+- **Windows**: [Chocolatey](https://community.chocolatey.org/packages/die) 
+- **Linux**:
+  - **Parrot OS**: Package name `detect-it-easy`
+  - **Arch Linux**: AUR package [detect-it-easy-git](https://aur.archlinux.org/packages/detect-it-easy-git/)
+  - **openSUSE**: [OBS](https://build.opensuse.org/package/show/home:mnhauke/detect-it-easy)
+  - **REMnux**: Malware analysis distribution
 
-Edit build_lin64.sh ( check QT_PATH variable)
+> [!NOTE]
+> Use **Detect It Easy** bot via **Telegram** to quickly check files: [**@detectiteasy_bot**](https://t.me/detectiteasy_bot)
 
-Run build_lin64.sh
+### ⚙️ Build from Source
 
-How to build on OSX
-=======
+See the [BUILD.md](docs/BUILD.md) for detailed instructions.
 
-Install Qt 5.12.8: https://github.com/horsicq/build_tools
+### 🐳 Docker Installation
 
-Clone project: git clone --recursive https://github.com/horsicq/DIE-engine.git
+Run DiE in a Docker container:
 
-Edit build_mac.sh ( check QT_PATH variable)
+```bash
+git clone --recursive https://github.com/horsicq/Detect-It-Easy
+cd Detect-It-Easy/
+docker build . -t horsicq:diec
+```
 
-Run build_mac.sh
+## 🖥️ Usage
 
-How to build on Windows(XP)
-=======
+Detect It Easy offers three versions:
 
-Install Visual Studio 2013: https://github.com/horsicq/build_tools
+- **die** - Graphical interface.
+- **diec** - Command-line version for batch processing.
+- **diel** - Lightweight GUI version.
 
-Install Qt 5.6.3 for VS2013: https://github.com/horsicq/build_tools
+For detailed usage, refer to the [RUN.md](docs/RUN.md).
 
-Install 7-Zip: https://github.com/horsicq/build_tools
+### 🔎 Example Use Cases
 
-Clone project: git clone --recursive https://github.com/horsicq/DIE-engine.git
+- **Malware Analysis**: Identify file types, packers, or protections.
+- **Security Audits**: Determine executable file types and potential security risks.
+- **Software Forensics**: Inspect software components and validate compliance.
 
-Edit build_winxp.bat ( check VS_PATH,  SEVENZIP_PATH, QT_PATH variables)
+## 🏆 Special Thanks
 
-Run build_winxp.bat
+Thanks to all contributors!
 
-How to build on Windows(7-10)
-=======
+<a href="https://github.com/horsicq/Detect-It-Easy/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=horsicq/Detect-It-Easy" />
+</a>
 
-Install Visual Studio 2017: https://github.com/horsicq/build_tools
+Thanks to [PELock Software Protection & Reverse Engineering](https://www.pelock.com)
 
-Install Qt 5.12.8 for VS2017: https://github.com/horsicq/build_tools
-
-Install 7-Zip: https://github.com/horsicq/build_tools
-
-Clone project: git clone --recursive https://github.com/horsicq/DIE-engine.git
-
-Edit build_win32.bat ( check VS_PATH,  SEVENZIP_PATH, QT_PATH variables)
-
-Run build_win32.bat
+![Mascot](mascots/logo.png)

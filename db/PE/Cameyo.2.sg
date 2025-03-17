@@ -1,20 +1,12 @@
-// DIE's signature file
+// Detect It Easy: detection rule file
 
-init("protector","Cameyo");
+init("protector", "Cameyo");
 
-function detect(bShowType,bShowVersion,bShowOptions)
-{
-    if(PE.isOverlayPresent())
-    {
-        if(PE.compareOverlay("'MZ'"))
-        {
-            if(PE.getVersionStringInfo("ProductName")=="Cameyo Application Virtualization")
-            {
-                 sVersion=PE.getFileVersion();
-                 bDetected=1;
-            }
-        }
+function detect() {
+    if (PE.isOverlayPresent() && PE.compareOverlay("'MZ'") && PE.getVersionStringInfo("ProductName") == "Cameyo Application Virtualization") {
+        sVersion = PE.getFileVersion();
+        bDetected = true;
     }
 
-    return result(bShowType,bShowVersion,bShowOptions);
+    return result();
 }

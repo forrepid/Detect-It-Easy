@@ -1,15 +1,15 @@
-init("compiler","Watcom");
+init("compiler", "Watcom");
 
-function detect(bShowType,bShowVersion,bShowOptions)
-{
-    var nData=ELF.getSectionNumber(".data");
+function detect() {
+    var nData = ELF.getSectionNumber(".data");
 
-    var nOffset=ELF.getSectionFileOffset(nData);
-    var nSize=ELF.getSectionFileSize(nData);
-    if(ELF.findString(nOffset,nSize,"WATCOM")!=-1)
-    {
-        bDetected=1;
+    var nOffset = ELF.getSectionFileOffset(nData);
+    var nSize = ELF.getSectionFileSize(nData);
+    if (ELF.findString(nOffset, nSize, "WATCOM") != -1) {
+        bDetected = true;
     }
 
-    return result(bShowType,bShowVersion,bShowOptions);
+    _setLang("C/C++", bDetected);
+
+    return result();
 }

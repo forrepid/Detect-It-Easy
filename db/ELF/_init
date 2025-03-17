@@ -1,3 +1,2 @@
-var File=ELF;
-
-includeScript("result-general");
+var File = ELF;
+var X = ELF;
