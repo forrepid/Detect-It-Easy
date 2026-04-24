@@ -1,6 +1,7 @@
 // Detect It Easy: detection rule file
+// Author: horsicq <horsicq@gmail.com>
 
-init("operation system", "DOS4G");
+meta("operation system", "DOS4G");
 
 function detect() {
     if (DOS4G.isVerbose()) {

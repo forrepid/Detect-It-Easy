@@ -1,6 +1,7 @@
 // Detect It Easy: detection rule file
+// Author: horsicq <horsicq@gmail.com>
 
-init("operation system", "Windows");
+meta("operation system", "OS/2");
 
 function detect() {
     if (LX.isVerbose()) {

@@ -1,11 +1,13 @@
-FROM debian:bullseye-slim
+FROM ubuntu:24.04
 
-RUN apt update -qq && apt upgrade -y && apt install -y wget tar libglib2.0-0 && \
-    wget https://github.com/horsicq/DIE-engine/releases/download/3.01/die_lin64_portable_3.01.tar.gz && \
-    tar -xzf die_lin64_portable_3.01.tar.gz
+# Newest version of DIE, check https://github.com/horsicq/DIE-engine/releases .
+ARG DIE_VERSION=3.20
+RUN apt update -qq && apt upgrade -y  && apt install -y wget && \
+    wget https://github.com/horsicq/DIE-engine/releases/download/Beta/die_${DIE_VERSION}_Ubuntu_24.04_amd64.deb && \
+    apt install -y ./die_${DIE_VERSION}_Ubuntu_24.04_amd64.deb && \
+    rm die_${DIE_VERSION}_Ubuntu_24.04_amd64.deb && rm -rf /usr/lib/die/db
 
 # db update
-RUN rm -rf /die_lin64_portable/base/db
-COPY ./db /die_lin64_portable/base/db
+COPY ./db /usr/lib/die/db
 
-ENTRYPOINT ["/die_lin64_portable/diec.sh"]
+ENTRYPOINT ["/usr/bin/diec"]

@@ -3,11 +3,14 @@
 ```bash
 git clone https://github.com/horsicq/DIE-engine.git
 cd DIE-engine
-docker build . -t horsicq:diec
+sudo docker build . -t horsicq:diec
 ```
 
-# How to build on Linux based on Debian
+# How to build on Linux based on Debian 
 
+* You can also watch tutorial on [YouTube](https://www.youtube.com/watch?v=hODcbA_1Tns)
+* For further Information you can look at [fr0stb1rd blogpost](https://fr0stb1rd.gitlab.io/posts/building-and-running-detect-it-easy-on-kali-linux-complete-tutorial/).
+  
 #### Install packages:
 
 ```bash
@@ -20,10 +23,10 @@ sudo apt-get install qtbase5-dev qtscript5-dev qttools5-dev-tools libqt5svg5-dev
 sudo apt-get install qt5-default -y
 ```
 
-- Ubuntu 21.04-22.04
+- Ubuntu 21.04-26.04
 
 ```bash
-sudo apt-get install qtchooser qt5-qmake -y
+sudo apt-get install qtchooser qt5-qmake pkg-config -y
 ```
 
 #### Clone this repo recursively:
@@ -43,6 +46,72 @@ bash -x build_dpkg.sh
 
 ```bash
 sudo dpkg -i release/$(ls release)
+```
+
+# How to build on Linux based on Fedora (DNF) 
+  
+#### Install packages:
+
+```bash
+sudo dnf install qt5-qtbase-devel qt5-qtscript-devel qt5-qttools-devel git make gcc-c++
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+#### Build
+
+```bash
+chmod a+x configure
+./configure
+make -j4
+```
+
+# How to build on Linux based on openSuse (zypper) 
+  
+#### Install packages:
+
+```bash
+sudo zypper install libqt5-qtbase-devel libqt5-qtscript-devel libqt5-qttools-devel libqt5-qtsvg-devel git gcc-c++ make
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+#### Build
+
+```bash
+chmod a+x configure
+./configure
+make -j4
+```
+
+# How to build on Linux based on Arch Linux (pacman) 
+  
+#### Install packages:
+
+```bash
+sudo pacman -S --needed git base-devel qt5-base qt5-tools qt5-script
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+#### Build
+
+```bash
+chmod a+x configure
+./configure
+make -j4
 ```
 
 # How to build on Linux(Automake)
@@ -73,13 +142,39 @@ make -j4
 sudo make install
 ```
 
+# How to build on Linux(QT6)
+
+### Qt framework has to be installed on the system.
+
+#### (Ubuntu) Install Qt Framework:
+
+```bash
+sudo apt-get install --quiet --assume-yes build-essential qt6-base-dev qt6-base-dev-tools qt6-tools-dev-tools qt6-5compat-dev libqt6svg6-dev qt6-declarative-dev
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+
+#### Build
+
+```bash
+mkdir build
+cd build
+qmake6 ../die_source.pro CONFIG+=release
+make
+```
+
 # How to build on macOS
 
 Install Qt 5.15.2: https://github.com/horsicq/build_tools
 
 Clone project: git clone --recursive https://github.com/horsicq/DIE-engine.git
 
-Edit build_mac.sh ( check QMAKE_PATH variable)
+Edit build_mac.sh (check QMAKE_PATH variable)
 
 Run build script: bash -x build_mac.sh
 
@@ -93,7 +188,7 @@ Install 7-Zip: https://github.com/horsicq/build_tools
 
 Clone project: git clone --recursive https://github.com/horsicq/DIE-engine.git
 
-Edit build_winxp.bat ( check VSVARS_PATH, SEVENZIP_PATH, QMAKE_PATH variables)
+Edit build_winxp.bat (check VSVARS_PATH, SEVENZIP_PATH, QMAKE_PATH variables)
 
 Run build_winxp.bat
 
@@ -133,4 +228,146 @@ cd build
 make -j4
 # To use it as a command, uncomment the following line:
 # sudo make install -j4
+```
+
+# How to build with MinGW/MSYS2
+
+Install MSYS2: https://www.msys2.org/
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+
+### Install libaries
+
+```bash
+pacman -S mingw-w64-ucrt-x86_64-gcc
+pacman -S mingw-w64-x86_64-qt5-tools
+```
+
+#### Build
+
+```bash
+chmod a+x configure
+./configure
+make -j4
+```
+
+# How to build with WSL
+
+- Activate Windows Subsystem for Linux
+- Download from the Microsoft Store any distribution
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+
+### Install libaries
+
+```bash
+sudo apt-get install --quiet --assume-yes build-essential qtbase5-dev qttools5-dev-tools qtscript5-dev libqt5svg5-dev
+```
+
+#### Build
+
+```bash
+chmod a+x build_dpkg.sh
+./build_dpkg.sh
+```
+
+# How to build on Linux(Debug)
+
+### Qt framework has to be installed on the system.
+
+#### (Ubuntu) Install Qt Framework:
+
+```bash
+sudo apt-get install --quiet --assume-yes build-essential qt5-default qtbase5-dev qttools5-dev-tools qtscript5-dev libqt5svg5-dev
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+
+#### Build
+
+```bash
+mkdir build
+cd build
+qmake ../die_source.pro CONFIG+=debug CONFIG-=release
+make
+```
+
+# How to build on Linux(QT6/Debug)
+
+### Qt framework has to be installed on the system.
+
+#### (Ubuntu) Install Qt Framework:
+
+```bash
+sudo apt-get install --quiet --assume-yes build-essential qt6-base-dev qt6-base-dev-tools qt6-tools-dev-tools qt6-5compat-dev libqt6svg6-dev qt6-declarative-dev
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+
+#### Build
+
+```bash
+mkdir build
+cd build
+qmake6 ../die_source.pro CONFIG+=debug CONFIG-=release
+make
+```
+
+# How to build on Linux(QT5/AppImage)
+
+### Qt framework has to be installed on the system.
+
+#### (Ubuntu) Install Qt Framework:
+
+```bash
+sudo apt-get install --quiet --assume-yes build-essential qt5-default qtbase5-dev qttools5-dev-tools qtscript5-dev libqt5svg5-dev
+```
+
+#### Setup linuxdeploy ####
+```bash
+wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+chmod +x linuxdeploy-x86_64.AppImage
+sudo mv linuxdeploy-x86_64.AppImage /usr/local/bin/linuxdeploy
+sudo chmod +x /usr/local/bin/linuxdeploy
+
+wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
+sudo mv linuxdeploy-plugin-qt-x86_64.AppImage /usr/local/bin/linuxdeploy-plugin-qt
+```
+
+#### Clone this repo recursively:
+
+```bash
+git clone --recursive https://github.com/horsicq/DIE-engine.git
+cd DIE-engine
+```
+
+#### Build
+
+```bash
+chmod a+x configure
+./configure
+make
+chmod a+x create_appimage.sh
+./create_appimage.sh
 ```

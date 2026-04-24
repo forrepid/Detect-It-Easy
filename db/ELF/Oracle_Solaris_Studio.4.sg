@@ -1,7 +1,7 @@
 // Detect It Easy: detection rule file
 // Author: anonymous
 
-init("compiler", "Oracle Solaris Studio");
+meta("compiler", "Oracle Solaris Studio");
 
 function getOSSVersion() {
     var sResult = "";
@@ -35,13 +35,13 @@ function detect() {
             bDetected = true;
         }
         var sOSSVersion = getOSSVersion();
-        if (sOSSVersion != "") {
+        if (sOSSVersion) {
             bDetected = true;
             sVersion = sOSSVersion;
         }
     }
 
-    _setLang("C/C++", bDetected);
+    sLang = "C/C++";
 
     return result();
 }
