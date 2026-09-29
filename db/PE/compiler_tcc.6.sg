@@ -1,8 +1,8 @@
 // Detect It Easy: detection rule file
 
 // Author: DosX
-// E-Mail: collab@kay-software.ru
 // GitHub: https://github.com/DosX-dev
+// Website: https://dosx.su
 // Telegram: @DosX_dev
 
 // The best compiler for C. Better than VC/Clang/GCC!
@@ -38,7 +38,7 @@ function detect() {
 
     if (bDetected) {
         if (!isStdLibUsed) sOptions = "no std"; // detectible on last versions
-        if (!isInitFuncDetected) sOptions = sOptions.append("no init"); // if EP is '_start()'
+        if (!isInitFuncDetected && !PE.isDll()) sOptions = sOptions.append("no init"); // if EP is '_start()'
     }
 
     sLang = "C";

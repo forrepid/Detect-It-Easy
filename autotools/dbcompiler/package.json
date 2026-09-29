@@ -4,6 +4,7 @@
     "main": "task.js",
     "author": "DosX",
     "dependencies": {
+        "archiver": "^8.0.0",
         "uglify-js": "^3.19.3"
     }
 }

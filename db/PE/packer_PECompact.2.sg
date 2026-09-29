@@ -1,6 +1,7 @@
 // Detect It Easy: detection rule file
 // Author: horsicq <horsicq@gmail.com>
 
+// https://bitsum.com/portfolio/pecompact/
 meta("packer", "PECompact");
 
 function detect() {
@@ -59,6 +60,7 @@ function detect() {
                 case 20243: sVersion = "2.79b1"; break;
                 case 20245: sVersion = "2.79bB"; break;
                 case 20247: sVersion = "2.79bD"; break;
+                case 20250: sVersion = "2.80+"; break;
                 case 20252: sVersion = "2.80b1"; break;
                 case 20256: sVersion = "2.80b5"; break;
                 case 20261: sVersion = "2.82"; break;
@@ -91,7 +93,7 @@ function detect() {
             }
         }
     } else if (PE.isNet()) {
-        if (PE.isSignaturePresent(0, 512, "00'PEC2XO'000000000000..0000..'.rsrc'00")) {
+        if (PE.isSignaturePresent(0, Math.min(512, PE.getSize()), "00'PEC2XO'000000000000..0000..'.rsrc'00")) {
             sVersion = "2.X-3.X";
             sOptions = ".NET";
             bDetected = true;

@@ -14,25 +14,58 @@ function detect() {
         bDetected = true;
     }
 
+    var detectedTypes = []; // array to collect type names
+
     for (var i = 0; i < numOfDebugDataRecords; i++) {
         var sType = PE.getDebugDataType(i);
 
         if (sType === "UNKNOWN") {
-            detectUnknownDebugData(PE.getDebugDataOffset(i), PE.getDebugDataSize(i));
+            detectUnknownDebugData(PE.getDebugDataOffset(i));
         } else {
-            var typeToAppend = sType.toLowerCase();
+            var typeToAppend = String();
+
+            switch (sType) {
+                case "CODEVIEW": typeToAppend = "CodeView"; break;
+                case "VC_FEATURE": typeToAppend = "VC Feature"; break;
+                case "RESERVED10": typeToAppend = "Reserved (10)"; break;
+                case "EX_DLLCHARACTERISTICS": typeToAppend = "Ext-DLL Characteristics"; break;
+                case "REPRO": case "POGO":
+                case "COFF": case "FPO":
+                    typeToAppend = sType; break;
+                default:
+                    typeToAppend = sType.charAt(0) + sType.substring(1).toLowerCase();
+            }
 
             if (typeToAppend) {
-                sOptions = sOptions.append(typeToAppend);
+                detectedTypes.push(typeToAppend);
             }
         }
+    }
+
+    if (detectedTypes.length > 0) {
+        var normal = [],
+            abbr = [],
+            abbrRegex = /^[A-Z0-9]+$/;
+
+        for (var j = 0; j < detectedTypes.length; j++) {
+            if (abbrRegex.test(detectedTypes[j])) {
+                abbr.push(detectedTypes[j]);
+            } else {
+                normal.push(detectedTypes[j]);
+            }
+        }
+
+        normal.sort();
+        abbr.sort();
+
+        sOptions = normal.concat(abbr).join(", ");
     }
 
     return result();
 }
 
-function detectUnknownDebugData(nDataOffset, nDataSize) {
-    if (nDataSize < 2) {
+function detectUnknownDebugData(nDataOffset) {
+    if (PE.getDebugDataSize(i) < 2) {
         return;
     }
 
@@ -45,10 +78,10 @@ function detectUnknownDebugData(nDataOffset, nDataSize) {
             sVer = majorStr + "." + minorStr,
             nSymbols = PE.readWord(nDataOffset + 0xE);
 
-        _setResult("debug data", "Borland TDS", sVer, nSymbols ? (nSymbols + " symbols") : "");
+        _setResult("debug data", "Borland TDS", sVer, nSymbols ? (nSymbols + " symbols") : String());
     } else if (PE.compare("'FB09'", nDataOffset)) {
-        _setResult("debug data", "Borland TDS", "", "Delphi TDS");
+        _setResult("debug data", "Borland TDS", String(), "Delphi TDS");
     } else if (PE.compare("'FB0A'", nDataOffset)) {
-        _setResult("debug data", "Borland TDS", "", "C++ TDS");
+        _setResult("debug data", "Borland TDS", String(), "C++ TDS");
     }
 }

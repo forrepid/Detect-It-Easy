@@ -1,15 +1,15 @@
 // Detect It Easy: detection rule file
 
 // Author: DosX
-// E-Mail: collab@kay-software.ru
 // GitHub: https://github.com/DosX-dev
+// Website: https://dosx.su
 // Telegram: @DosX_dev
 
+// https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist
 meta("library", "Microsoft C/C++ Runtime");
 
 function detect() {
-    if (PE.isLibraryPresent("vcruntime140.dll") ||
-        PE.isLibraryPresent("vcruntime140_1.dll")) {
+    if (PE.isLibraryPresentExp(/^vcruntime140(d|_1(d)?|(_1(d)?)?_[a-z0-9]+)?(\.dll)?$/i)) {
         sOptions = "dynamic";
         bDetected = true;
     }

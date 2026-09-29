@@ -1,6 +1,7 @@
 // Detect It Easy: detection rule file
 // Authors: horsicq, ajax, adoxa, DosX
 
+// https://upx.github.io/
 meta("packer", "UPX");
 
 function isPatchedUPX() {
@@ -161,7 +162,7 @@ function detect() {
             }
 
             sOptions = "modified";
-        } else if (!PE.isSectionNamePresent("UPX0")) {
+        } else if (!PE.isSectionNamePresent("UPX0") && !sOptions) {
             sOptions = sOptions.append("modified");
         }
     }

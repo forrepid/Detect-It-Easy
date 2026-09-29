@@ -14,9 +14,18 @@ function detect() {
                 bDetected = true;
             }
         }
-    } else if (PE.compareEP("e8$$$$$$$$8bff558bec83ec..a1........8365....8365....5357bf........bb")) {
+    } else if (PE.compareEP("e8$$$$$$$$8bff558bec83ec..a1........8365....8365....5357bf........bb")) { // Microsoft Visual C/C++ (2008-2010, by EP)
         if (PE.compareOverlay("'PK'0304")) {
-            sOptions = "by Intel";
+            sName = "WinRAR";
+            sVersion = "5.0+";
+            sOptions = "ZIP";
+            bDetected = true;
+        }
+    } else if (PE.compareEP("e8$$$$$$$$558bec83c4..b8........53bb........56e8........e8........8bf0")) { // Borland C++
+        if (PE.compareOverlay("'PK'0304")) {
+            sName = "WinRAR";
+            sVersion = "3.0";
+            sOptions = "ZIP";
             bDetected = true;
         }
     }
@@ -27,7 +36,7 @@ function detect() {
         }
     }
     if (PE.compareEP("558becb8........e8........5356be........578d45..5633db5053ff15........85c00f84")) {
-        if (PE.findSignature(PE.getOverlayOffset(), 0x1000, "'PK'0304") != -1) {
+        if (PE.findSignature(PE.getOverlayOffset(), Math.min(0x1000, PE.getOverlaySize()), "'PK'0304") != -1) {
             sOptions = "by Symantec";
             bDetected = true;
         }
@@ -46,7 +55,7 @@ function detect() {
         }
     }
     if (PE.compareEP("558bec83ec..56ff15........8bf08a003c..75..84c074..803e..74..46803e..75..803e..75..46eb")) {
-        if (PE.findSignature(PE.getOverlayOffset(), 0x2000, "'PK'0304") != -1) {
+        if (PE.findSignature(PE.getOverlayOffset(), Math.min(0x2000, PE.getOverlaySize()), "'PK'0304") != -1) {
             sOptions = "Squeez SFX by SpeedProject 1995-1998";
             bDetected = true;
         }
@@ -56,6 +65,11 @@ function detect() {
             sOptions = "EasyZIP SFX by AKSoft 1995-1996";
             bDetected = true;
         }
+    }
+    if (PE.compareEP("a1........c1e0..a3........575133c0bf........b9........3bcf76") && //Borland C++
+        PE.isSignaturePresent(PE.getOverlayOffset(), Math.min(4096, PE.getOverlaySize()), "'PK'0304")) {
+        sOptions = "custom";
+        bDetected = true;
     }
 
     return result();

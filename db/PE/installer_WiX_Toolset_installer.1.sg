@@ -1,6 +1,7 @@
 // Detect It Easy: detection rule file
 // Author: hypn0 <hypn0@mail.ru>
 
+// https://en.wikipedia.org/wiki/WiX
 meta("installer", "WiX Toolset Installer");
 
 function detect() {
@@ -10,6 +11,7 @@ function detect() {
         } else if (PE.compareEP("e8$$$$$$$$558bec83ec..8365....8365....a1........5657bf........be........3bc774..85c674..f7")) {
             bDetected = true;
         } else if (PE.compareEP("e8$$$$$$$$8bff558bec83ec..a1........8365....8365....5357bf........bb........3bc774..85c374..f7")) {
+            sVersion = "3.X";
             bDetected = true;
         } else if (PE.isSectionNamePresent(".wixburn")) {
             sVersion = "1.0";
